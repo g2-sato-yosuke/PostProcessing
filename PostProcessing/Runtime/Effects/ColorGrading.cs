@@ -422,8 +422,8 @@ namespace UnityEngine.Rendering.PostProcessing
 
             if (gradingMode == GradingMode.External)
                 RenderExternalPipeline3D(context);
-            else if (gradingMode == GradingMode.HighDefinitionRange && supportComputeTex3D)
-                RenderHDRPipeline3D(context);
+            //else if (gradingMode == GradingMode.HighDefinitionRange && supportComputeTex3D)
+            //    RenderHDRPipeline3D(context);
             else if (gradingMode == GradingMode.HighDefinitionRange)
                 RenderHDRPipeline2D(context);
             else

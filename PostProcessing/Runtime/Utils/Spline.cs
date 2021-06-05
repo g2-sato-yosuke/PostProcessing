@@ -53,28 +53,6 @@ namespace UnityEngine.Rendering.PostProcessing
         /// <param name="bounds">The curve bounds</param>
         public Spline(AnimationCurve curve, float zeroValue, bool loop, Vector2 bounds)
         {
-            Initialize(curve, zeroValue, loop, bounds);
-        }
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="src"></param>
-        public Spline(Spline src)
-        {
-            Initialize(src.curve, src.m_ZeroValue, src.m_Loop, new Vector2(0.0f, src.m_Range));
-        }
-
-
-        /// <summary>
-        /// 初期化
-        /// </summary>
-        /// <param name="curve"></param>
-        /// <param name="zeroValue"></param>
-        /// <param name="loop"></param>
-        /// <param name="bounds"></param>
-        void Initialize(AnimationCurve curve, float zeroValue, bool loop, Vector2 bounds)
-        {
             Assert.IsNotNull(curve);
             this.curve = curve;
             m_ZeroValue = zeroValue;
@@ -82,6 +60,32 @@ namespace UnityEngine.Rendering.PostProcessing
             m_Range = bounds.magnitude;
             cachedData = new float[k_Precision];
         }
+
+        
+        /// <summary>
+        /// コピー
+        /// </summary>
+        /// <param name="src"></param>
+        public void Copy(Spline src)
+        {
+            Assert.IsNotNull(curve);
+            this.curve = src.curve;
+            m_ZeroValue = src.m_ZeroValue;
+            m_Loop = src.m_Loop;
+            m_Range = src.m_Range;
+            
+            if (cachedData == null)
+            {
+                cachedData = new float[k_Precision];
+            }
+
+            for (int i = 0; i < k_Precision; i++)
+            {
+                cachedData[i] = src.cachedData[i];
+            }
+        }
+
+        
 
         /// <summary>
         /// Caches the curve data at a given frame. The curve data will only be cached once per
