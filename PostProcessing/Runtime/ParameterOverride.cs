@@ -85,6 +85,19 @@ namespace UnityEngine.Rendering.PostProcessing
         /// </summary>
         public T value;
 
+        public T OverrideValue
+        {
+            get
+            {
+                if (overrideState)
+                {
+                    return value;
+                }
+
+                return default(T);
+            }
+        }
+        
         /// <summary>
         /// Creates a <c>ParameterOverride</c> with a default <see cref="value"/> and
         /// <see cref="ParameterOverride.overrideState"/> set to <c>false</c>.

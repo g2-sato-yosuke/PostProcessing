@@ -66,8 +66,12 @@ namespace UnityEngine.Rendering.PostProcessing
         /// コピー
         /// </summary>
         /// <param name="src"></param>
-        public void Copy(Spline src)
+        public bool Copy(Spline src)
         {
+            if (src == null)
+            {
+                return false;
+            }
             Assert.IsNotNull(curve);
             this.curve = src.curve;
             m_ZeroValue = src.m_ZeroValue;
@@ -83,6 +87,8 @@ namespace UnityEngine.Rendering.PostProcessing
             {
                 cachedData[i] = src.cachedData[i];
             }
+
+            return true;
         }
 
         
